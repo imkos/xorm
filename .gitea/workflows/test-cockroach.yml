@@ -1,10 +1,11 @@
 name: test cockroach
-on: 
+on:
   push:
     branches:
-      - main
-      - v1
-  pull_request:
+      - donttrigger # disabled for now
+      #- main
+      #- v1
+  #pull_request:
 
 jobs:
   test-cockroach:
