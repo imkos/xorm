@@ -619,3 +619,95 @@ func TestMyArray(t *testing.T) {
 	assert.True(t, has)
 	assert.EqualValues(t, v, m.Content)
 }
+
+type ZDecimal struct {
+	value *big.Int
+}
+
+func (d *ZDecimal) FromDB(data []byte) error {
+	i, _ := strconv.ParseInt(string(data), 10, 64)
+	*d = ZDecimal{
+		value: big.NewInt(i),
+	}
+	return nil
+}
+
+func (d ZDecimal) ToDB() ([]byte, error) {
+	if d.value == nil {
+		return []byte("0"), nil
+	}
+	return []byte(fmt.Sprintf("%d", (d.value).Int64())), nil
+}
+
+func (d ZDecimal) IsZero() bool {
+	if d.value == nil {
+		return true
+	}
+	return d.value.Sign() == 0
+}
+
+func (d ZDecimal) String() string {
+	if d.value == nil {
+		return "0"
+	}
+	return d.value.String()
+}
+
+func TestZDecimal(t *testing.T) {
+	type ZMyMoney struct {
+		Id      int64
+		Account string
+		Amount  ZDecimal
+	}
+
+	assert.NoError(t, PrepareEngine())
+	assertSync(t, new(ZMyMoney))
+
+	_, err := testEngine.Insert(&ZMyMoney{
+		Account: "test",
+		Amount: ZDecimal{
+			value: big.NewInt(10000000000000000),
+		},
+	})
+	assert.NoError(t, err)
+
+	m := ZMyMoney{
+		Id: 1,
+	}
+	has, err := testEngine.Get(&m)
+	assert.NoError(t, err)
+	assert.True(t, has)
+
+	_, err = testEngine.Update(&ZMyMoney{
+		Id:      1,
+		Account: "test2",
+	})
+	assert.NoError(t, err)
+	m2 := ZMyMoney{
+		Id: 1,
+	}
+	has, err = testEngine.Get(&m2)
+
+	assert.NoError(t, err)
+	assert.True(t, has)
+	assert.Equal(t, "test2", "test2")
+	assert.False(t, m2.Amount.IsZero())
+	assert.Equal(t, "10000000000000000", m2.Amount.String())
+
+	_, err = testEngine.AllCols().Update(&ZMyMoney{
+		Id:      1,
+		Account: "test3",
+	})
+	assert.NoError(t, err)
+
+	var m3 = ZMyMoney{
+		Id: 1,
+	}
+	has, err = testEngine.Get(&m3)
+
+	assert.NoError(t, err)
+	assert.True(t, has)
+	assert.Equal(t, "test3", "test3")
+	assert.True(t, m3.Amount.IsZero())
+	assert.Equal(t, "0", m3.Amount.String())
+}

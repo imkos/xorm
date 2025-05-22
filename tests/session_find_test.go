@@ -899,6 +899,58 @@ func TestFindExtends3(t *testing.T) {
 	assert.EqualValues(t, 2, len(results))
 }
 
+func TestFindExtends4(t *testing.T) {
+	type FindExtends4A struct {
+		Id   int64
+		Age  int
+		Name string
+	}
+
+	type FindExtends4B struct {
+		Id    int64
+		ExtId int64 `xorm:"index"`
+		Age   int
+		Name  string
+		Value int
+	}
+
+	assert.NoError(t, PrepareEngine())
+	assertSync(t, new(FindExtends4A), new(FindExtends4B))
+
+	fe := FindExtends4A{
+		Age:  1,
+		Name: "1",
+	}
+	cnt, err := testEngine.Insert(&fe)
+	assert.NoError(t, err)
+	assert.EqualValues(t, 1, cnt)
+
+	cnt, err = testEngine.Insert(&FindExtends4B{
+		ExtId: fe.Id,
+		Age:   2,
+		Name:  "2",
+		Value: 3,
+	})
+	assert.NoError(t, err)
+	assert.EqualValues(t, 1, cnt)
+
+	type FindExtends4C struct {
+		FindExtends4A `xorm:"extends"`
+		FindExtends4B `xorm:"extends"`
+	}
+	var results []FindExtends4C
+	err = testEngine.Table("find_extends4_a").
+		Join("INNER", "find_extends4_b", "`find_extends4_b`.`ext_id`=`find_extends4_a`.`id`").
+		Find(&results)
+	assert.NoError(t, err)
+	assert.EqualValues(t, 1, len(results))
+	assert.EqualValues(t, 1, results[0].FindExtends4A.Age)
+	assert.EqualValues(t, "1", results[0].FindExtends4A.Name)
+	assert.EqualValues(t, 2, results[0].FindExtends4B.Age)
+	assert.EqualValues(t, "2", results[0].FindExtends4B.Name)
+	assert.EqualValues(t, 3, results[0].FindExtends4B.Value)
+}
+
 func TestFindCacheLimit(t *testing.T) {
 	type InviteCode struct {
 		ID      int64     `xorm:"pk autoincr 'id'"`

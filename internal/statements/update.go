@@ -126,6 +126,9 @@ func (statement *Statement) BuildUpdates(tableValue reflect.Value,
 
 		if fieldValue.CanAddr() {
 			if structConvert, ok := fieldValue.Addr().Interface().(convert.Conversion); ok {
+				if !includeNil && !requiredField && utils.IsZero(fieldValue.Interface()) {
+					continue
+				}
 				data, err := structConvert.ToDB()
 				if err != nil {
 					return nil, nil, err

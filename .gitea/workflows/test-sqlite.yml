@@ -2,41 +2,19 @@ name: test sqlite
 on: 
   push:
     branches:
-      - master
+      - main
+      - v1
   pull_request:
-
-env:
-  GOPROXY: https://goproxy.io,direct
-  GOPATH: /go_path
-  GOCACHE: /go_cache
 
 jobs:
   test-sqlite:
     name: unit test & test sqlite
     runs-on: ubuntu-latest
     steps:
-      # - name: cache go path
-      #   id: cache-go-path
-      #   uses: https://github.com/actions/cache@v3
-      #   with:
-      #     path: /go_path
-      #     key: go_path-${{ github.repository }}-${{ github.ref_name }}
-      #     restore-keys: |
-      #       go_path-${{ github.repository }}-
-      #       go_path-
-      # - name: cache go cache
-      #   id: cache-go-cache
-      #   uses: https://github.com/actions/cache@v3
-      #   with:
-      #     path: /go_cache
-      #     key: go_cache-${{ github.repository }}-${{ github.ref_name }}
-      #     restore-keys: |
-      #       go_cache-${{ github.repository }}-
-      #       go_cache-                            
+      - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: 1.20
-      - uses: actions/checkout@v3
+          go-version-file: 'go.mod'
       - name: vet
         run: make vet
       - name: format check
@@ -47,3 +25,13 @@ jobs:
         run: make test-sqlite3
       - name: test sqlite3 with cache
         run: TEST_CACHE_ENABLE=true make test-sqlite3
+  
+  govulncheck_job:
+    runs-on: ubuntu-latest
+    name: Run govulncheck
+    steps:
+      - id: govulncheck
+        uses: golang/govulncheck-action@v1
+        with:
+          go-version-file: 'go.mod'
+          go-package: ./...

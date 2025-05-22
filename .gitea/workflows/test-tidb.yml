@@ -2,41 +2,19 @@ name: test tidb
 on: 
   push:
     branches:
-      - master
+      - main
+      - v1
   pull_request:
-
-env:
-  GOPROXY: https://goproxy.io,direct
-  GOPATH: /go_path
-  GOCACHE: /go_cache
 
 jobs:
   test-tidb:
     name: test tidb
     runs-on: ubuntu-latest
     steps:
-      # - name: cache go path
-      #   id: cache-go-path
-      #   uses: https://github.com/actions/cache@v3
-      #   with:
-      #     path: /go_path
-      #     key: go_path-${{ github.repository }}-${{ github.ref_name }}
-      #     restore-keys: |
-      #       go_path-${{ github.repository }}-
-      #       go_path-
-      # - name: cache go cache
-      #   id: cache-go-cache
-      #   uses: https://github.com/actions/cache@v3
-      #   with:
-      #     path: /go_cache
-      #     key: go_cache-${{ github.repository }}-${{ github.ref_name }}
-      #     restore-keys: |
-      #       go_cache-${{ github.repository }}-
-      #       go_cache-                            
+      - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: 1.20
-      - uses: actions/checkout@v3
+          go-version-file: 'go.mod'
       - name: test tidb
         env:
           TEST_TIDB_HOST: "tidb:4000"
@@ -48,5 +26,3 @@ jobs:
     services:
       tidb:
         image: pingcap/tidb:v3.0.3
-        ports:
-          - 4000:4000

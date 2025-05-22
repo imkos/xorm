@@ -199,7 +199,7 @@ func (m *Migrate) createMigrationTableIfNotExists() error {
 
 	idCol := schemas.NewColumn(m.options.IDColumnName, "", schemas.SQLType{
 		Name: "VARCHAR",
-	}, 255, 0, true)
+	}, 255, 0, false)
 	idCol.IsPrimaryKey = true
 
 	table := schemas.NewTable(m.options.TableName, reflect.TypeOf(new(schemas.Table)))
