@@ -9,9 +9,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/imkos/xorm/internal/utils"
+	"github.com/imkos/xorm/schemas"
 	"xorm.io/builder"
-	"xorm.io/xorm/internal/utils"
-	"xorm.io/xorm/schemas"
 )
 
 func (statement *Statement) writeInsertOutput(buf *strings.Builder, table *schemas.Table) error {

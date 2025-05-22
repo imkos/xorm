@@ -7,10 +7,10 @@ package xorm
 import (
 	"reflect"
 
+	"github.com/imkos/xorm/internal/statements"
+	"github.com/imkos/xorm/internal/utils"
+	"github.com/imkos/xorm/schemas"
 	"xorm.io/builder"
-	"xorm.io/xorm/internal/statements"
-	"xorm.io/xorm/internal/utils"
-	"xorm.io/xorm/schemas"
 )
 
 // enumerated all errors

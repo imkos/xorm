@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"xorm.io/xorm/caches"
-	"xorm.io/xorm/schemas"
+	"github.com/imkos/xorm/caches"
+	"github.com/imkos/xorm/schemas"
 
 	"github.com/stretchr/testify/assert"
 )

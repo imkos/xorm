@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/imkos/xorm/dialects"
+	"github.com/imkos/xorm/internal/utils"
+	"github.com/imkos/xorm/schemas"
 	"xorm.io/builder"
-	"xorm.io/xorm/dialects"
-	"xorm.io/xorm/internal/utils"
-	"xorm.io/xorm/schemas"
 )
 
 // Join The joinOP should be one of INNER, LEFT OUTER, CROSS etc - this will be prepended to JOIN

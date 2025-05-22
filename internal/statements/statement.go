@@ -13,14 +13,14 @@ import (
 	"strings"
 	"time"
 
+	"github.com/imkos/xorm/contexts"
+	"github.com/imkos/xorm/convert"
+	"github.com/imkos/xorm/dialects"
+	"github.com/imkos/xorm/internal/json"
+	"github.com/imkos/xorm/internal/utils"
+	"github.com/imkos/xorm/schemas"
+	"github.com/imkos/xorm/tags"
 	"xorm.io/builder"
-	"xorm.io/xorm/contexts"
-	"xorm.io/xorm/convert"
-	"xorm.io/xorm/dialects"
-	"xorm.io/xorm/internal/json"
-	"xorm.io/xorm/internal/utils"
-	"xorm.io/xorm/schemas"
-	"xorm.io/xorm/tags"
 )
 
 var (

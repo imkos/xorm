@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/imkos/xorm"
+	"github.com/imkos/xorm/internal/utils"
+	"github.com/imkos/xorm/names"
+	"github.com/imkos/xorm/schemas"
 	"xorm.io/builder"
-	"xorm.io/xorm"
-	"xorm.io/xorm/internal/utils"
-	"xorm.io/xorm/names"
-	"xorm.io/xorm/schemas"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/imkos/xorm"
+	"github.com/imkos/xorm/schemas"
 	"github.com/stretchr/testify/assert"
-	"xorm.io/xorm"
-	"xorm.io/xorm/schemas"
 )
 
 func TestStoreEngine(t *testing.T) {
@@ -752,20 +752,18 @@ func getKeysFromMap(m map[string]*schemas.Index) []string {
 	return ss
 }
 
-
 type SyncTestUser struct {
-	Id         int64       `xorm:"pk autoincr 'id' comment('primary key 1')"`
-	Name       string    `xorm:"'name' notnull comment('nickname')" json:"name"`
+	Id   int64  `xorm:"pk autoincr 'id' comment('primary key 1')"`
+	Name string `xorm:"'name' notnull comment('nickname')" json:"name"`
 }
 
 func (m *SyncTestUser) TableName() string {
 	return "sync_test_user"
 }
 
-
 type SyncTestUser2 struct {
-	Id         int64       `xorm:"pk autoincr 'id' comment('primary key 2')"`
-	Name       string    `xorm:"'name' notnull comment('nickname')" json:"name"`
+	Id   int64  `xorm:"pk autoincr 'id' comment('primary key 2')"`
+	Name string `xorm:"'name' notnull comment('nickname')" json:"name"`
 }
 
 func (m *SyncTestUser2) TableName() string {
@@ -789,5 +787,4 @@ func TestSync2_3(t *testing.T) {
 		assert.EqualValues(t, tables[0].GetColumn("id").Comment, tableInfo.GetColumn("id").Comment)
 
 	}
-	
 }

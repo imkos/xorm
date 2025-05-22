@@ -13,8 +13,8 @@ import (
 	"strings"
 	"unicode"
 
-	"xorm.io/xorm/core"
-	"xorm.io/xorm/schemas"
+	"github.com/imkos/xorm/core"
+	"github.com/imkos/xorm/schemas"
 )
 
 var (

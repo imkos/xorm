@@ -16,13 +16,14 @@ import (
 	"io"
 	"reflect"
 	"strconv"
-	"xorm.io/xorm/contexts"
-	"xorm.io/xorm/convert"
-	"xorm.io/xorm/core"
-	"xorm.io/xorm/internal/json"
-	"xorm.io/xorm/internal/statements"
-	"xorm.io/xorm/log"
-	"xorm.io/xorm/schemas"
+
+	"github.com/imkos/xorm/contexts"
+	"github.com/imkos/xorm/convert"
+	"github.com/imkos/xorm/core"
+	"github.com/imkos/xorm/internal/json"
+	"github.com/imkos/xorm/internal/statements"
+	"github.com/imkos/xorm/log"
+	"github.com/imkos/xorm/schemas"
 )
 
 // ErrFieldIsNotExist columns does not exist

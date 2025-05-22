@@ -10,7 +10,7 @@ import (
 	"reflect"
 
 	"xorm.io/builder"
-	"xorm.io/xorm/core"
+	"github.com/imkos/xorm/core"
 )
 
 // Rows rows wrapper a rows to

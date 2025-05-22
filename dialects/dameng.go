@@ -13,10 +13,10 @@ import (
 	"strconv"
 	"strings"
 
-	"xorm.io/xorm/convert"
-	"xorm.io/xorm/core"
-	"xorm.io/xorm/internal/utils"
-	"xorm.io/xorm/schemas"
+	"github.com/imkos/xorm/convert"
+	"github.com/imkos/xorm/core"
+	"github.com/imkos/xorm/internal/utils"
+	"github.com/imkos/xorm/schemas"
 )
 
 func init() {

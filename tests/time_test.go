@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"xorm.io/xorm/convert"
+	"github.com/imkos/xorm/convert"
 
-	"xorm.io/xorm/internal/utils"
+	"github.com/imkos/xorm/internal/utils"
 
 	"github.com/stretchr/testify/assert"
 )

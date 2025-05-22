@@ -7,9 +7,10 @@ package dialects
 import (
 	"strings"
 	"time"
-	"xorm.io/xorm/internal/utils"
 
-	"xorm.io/xorm/schemas"
+	"github.com/imkos/xorm/internal/utils"
+
+	"github.com/imkos/xorm/schemas"
 )
 
 // FormatColumnTime format column time

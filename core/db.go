@@ -13,15 +13,13 @@ import (
 	"regexp"
 	"sync"
 
-	"xorm.io/xorm/contexts"
-	"xorm.io/xorm/log"
-	"xorm.io/xorm/names"
+	"github.com/imkos/xorm/contexts"
+	"github.com/imkos/xorm/log"
+	"github.com/imkos/xorm/names"
 )
 
-var (
-	// DefaultCacheSize sets the default cache size
-	DefaultCacheSize = 200
-)
+// DefaultCacheSize sets the default cache size
+var DefaultCacheSize = 200
 
 // MapToSlice map query and struct as sql and args
 func MapToSlice(query string, mp interface{}) (string, []interface{}, error) {
@@ -79,9 +77,7 @@ type cacheStruct struct {
 	idx   int
 }
 
-var (
-	_ QueryExecuter = &DB{}
-)
+var _ QueryExecuter = &DB{}
 
 // DB is a wrap of sql.DB with extra contents
 type DB struct {
@@ -234,9 +230,7 @@ func (db *DB) QueryRowStruct(query string, st interface{}) *Row {
 	return db.QueryRowStructContext(context.Background(), query, st)
 }
 
-var (
-	re = regexp.MustCompile(`[?](\w+)`)
-)
+var re = regexp.MustCompile(`[?](\w+)`)
 
 // ExecMapContext exec map with context.ContextHook
 // insert into (name) values (?)

@@ -12,10 +12,10 @@ import (
 	"strconv"
 	"testing"
 
-	"xorm.io/xorm"
-	"xorm.io/xorm/convert"
-	"xorm.io/xorm/internal/json"
-	"xorm.io/xorm/schemas"
+	"github.com/imkos/xorm"
+	"github.com/imkos/xorm/convert"
+	"github.com/imkos/xorm/internal/json"
+	"github.com/imkos/xorm/schemas"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -700,7 +700,7 @@ func TestZDecimal(t *testing.T) {
 	})
 	assert.NoError(t, err)
 
-	var m3 = ZMyMoney{
+	m3 := ZMyMoney{
 		Id: 1,
 	}
 	has, err = testEngine.Get(&m3)

@@ -13,8 +13,8 @@ import (
 	"strconv"
 	"strings"
 
-	"xorm.io/xorm/core"
-	"xorm.io/xorm/schemas"
+	"github.com/imkos/xorm/core"
+	"github.com/imkos/xorm/schemas"
 )
 
 // from http://www.postgresql.org/docs/current/static/sql-keywords-appendix.html

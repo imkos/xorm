@@ -13,17 +13,15 @@ import (
 	"strconv"
 	"time"
 
-	"xorm.io/xorm/caches"
-	"xorm.io/xorm/convert"
-	"xorm.io/xorm/core"
-	"xorm.io/xorm/internal/utils"
-	"xorm.io/xorm/schemas"
+	"github.com/imkos/xorm/caches"
+	"github.com/imkos/xorm/convert"
+	"github.com/imkos/xorm/core"
+	"github.com/imkos/xorm/internal/utils"
+	"github.com/imkos/xorm/schemas"
 )
 
-var (
-	// ErrObjectIsNil return error of object is nil
-	ErrObjectIsNil = errors.New("object should not be nil")
-)
+// ErrObjectIsNil return error of object is nil
+var ErrObjectIsNil = errors.New("object should not be nil")
 
 // Get retrieve one record from database, bean's non-empty fields
 // will be as conditions
@@ -66,7 +64,7 @@ func (session *Session) get(beans ...interface{}) (bool, error) {
 		return false, ErrObjectIsNil
 	}
 
-	var isStruct = beanValue.Elem().Kind() == reflect.Struct && !isPtrOfTime(beans[0])
+	isStruct := beanValue.Elem().Kind() == reflect.Struct && !isPtrOfTime(beans[0])
 	if isStruct {
 		if err := session.statement.SetRefBean(beans[0]); err != nil {
 			return false, err
@@ -212,7 +210,7 @@ func (session *Session) getSlice(rows *core.Rows, types []*sql.ColumnType, field
 			return err
 		}
 
-		var needAppend = len(*t) == 0 // both support slice is empty or has been initlized
+		needAppend := len(*t) == 0 // both support slice is empty or has been initlized
 		for i, r := range res {
 			if needAppend {
 				*t = append(*t, r.(*sql.NullString).String)
@@ -226,7 +224,7 @@ func (session *Session) getSlice(rows *core.Rows, types []*sql.ColumnType, field
 		if err != nil {
 			return err
 		}
-		var needAppend = len(*t) == 0
+		needAppend := len(*t) == 0
 		for ii := range fields {
 			s, err := convert.Interface2Interface(session.engine.DatabaseTZ, scanResults[ii])
 			if err != nil {
@@ -294,7 +292,7 @@ func (session *Session) cacheGet(bean interface{}, sqlStr string, args ...interf
 	table := session.statement.RefTable
 	ids, err := caches.GetCacheSql(cacher, tableName, newsql, args)
 	if err != nil {
-		var res = make([]string, len(table.PrimaryKeys))
+		res := make([]string, len(table.PrimaryKeys))
 		rows, err := session.NoCache().queryRows(newsql, args...)
 		if err != nil {
 			return false, err

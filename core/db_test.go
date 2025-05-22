@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"xorm.io/xorm/names"
+	"github.com/imkos/xorm/names"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/mattn/go-sqlite3"
@@ -625,7 +625,8 @@ func TestExecStruct(t *testing.T) {
 		t.Error(err)
 	}
 
-	user := User{Name: "xlw",
+	user := User{
+		Name:     "xlw",
 		Title:    "tester",
 		Age:      1.2,
 		Alias:    "lunny",
@@ -670,7 +671,8 @@ func BenchmarkExecStruct(b *testing.B) {
 
 	b.StartTimer()
 
-	user := User{Name: "xlw",
+	user := User{
+		Name:     "xlw",
 		Title:    "tester",
 		Age:      1.2,
 		Alias:    "lunny",

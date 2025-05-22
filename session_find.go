@@ -10,12 +10,12 @@ import (
 	"reflect"
 	"strings"
 
+	"github.com/imkos/xorm/caches"
+	"github.com/imkos/xorm/convert"
+	"github.com/imkos/xorm/internal/statements"
+	"github.com/imkos/xorm/internal/utils"
+	"github.com/imkos/xorm/schemas"
 	"xorm.io/builder"
-	"xorm.io/xorm/caches"
-	"xorm.io/xorm/convert"
-	"xorm.io/xorm/internal/statements"
-	"xorm.io/xorm/internal/utils"
-	"xorm.io/xorm/schemas"
 )
 
 const (

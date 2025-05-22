@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"reflect"
 
-	"xorm.io/xorm"
-	"xorm.io/xorm/schemas"
+	"github.com/imkos/xorm"
+	"github.com/imkos/xorm/schemas"
 )
 
 // MigrateFunc is the func signature for migrating.
